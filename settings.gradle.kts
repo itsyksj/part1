@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "part1"
 include(":chapter2")
+include(":chapter3")
