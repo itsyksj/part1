@@ -11,6 +11,10 @@ class MainActivity : AppCompatActivity() {
     //viewBinding 선언하기
     private lateinit var binding: ActivityMainBinding
 
+    //기본값 지정
+    var inputNumber: Int = 0
+    var cmToM = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,10 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         //해당 화면에 속하지 않는 id값 (사용불가)
         //val exampleTextView = binding.example
-
-        //기본값 지정
-        var inputNumber: Int = 0
-        var cmToM = true
 
         //입력값(숫자)은 화면표시를 위해 문자로 변환 후, 출력값을 위해 숫자로 재변환
         inputNumberEditText.addTextChangedListener { text ->
@@ -76,5 +76,19 @@ class MainActivity : AppCompatActivity() {
                 outputNumberTextView.text = inputNumber.times(100).toString()
             }
         }
+    }
+
+    //onSaveInstanceState를 통해 임시 UI 상태 저장하기
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean("cmToM", cmToM)
+        super.onSaveInstanceState(outState)
+    }
+
+    //onRestoreInstanceState를 통해 저장된 값 전달받고 UI상태 복원하기
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        cmToM = savedInstanceState.getBoolean("cmToM")
+        binding.inputUnit.text = if(cmToM) "cm" else "m"
+        binding.outputUnit.text = if(cmToM) "m" else "cm"
+        super.onRestoreInstanceState(savedInstanceState)
     }
 }
