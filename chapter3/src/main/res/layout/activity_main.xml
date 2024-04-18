@@ -12,7 +12,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:hint="숫자를 입력해주세요"
+        android:hint="숫자 입력"
         android:inputType="numberDecimal"
         android:maxLength="7"
         android:textSize="30sp"
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/inputUnit"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="cm"
@@ -52,7 +52,7 @@
 
     <TextView
         android:id="@+id/outputUnit"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginStart="5dp"
