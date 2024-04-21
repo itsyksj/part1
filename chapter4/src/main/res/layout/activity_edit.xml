@@ -51,10 +51,10 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/titleSpecialNote"
+        android:id="@+id/titleCaution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/titleSpecialNote"
+        android:text="@string/titleCaution"
         style="@style/title"
         app:layout_constraintTop_toBottomOf="@id/titlePhoneNumber"
         tools:ignore="MissingConstraints" />
@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/bodyName"
         style="@style/body"
+        android:inputType="text"
         android:maxLines="1"
         android:ellipsize="end"
         app:layout_constraintBaseline_toBaselineOf="@+id/titleName"
@@ -115,34 +116,36 @@
         android:id="@+id/bodyPhoneNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/bodyPhoneNumber"
+        android:hint="@string/bodyPhoneNumber"
+        android:inputType="phone"
         style="@style/body"
         app:layout_constraintBaseline_toBaselineOf="@+id/titlePhoneNumber"
         tools:ignore="MissingConstraints" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cautionCheckBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/checkBoxSpecialNote"
-        app:layout_constraintTop_toTopOf="@id/titleSpecialNote"
-        app:layout_constraintBottom_toBottomOf="@+id/titleSpecialNote"
+        android:text="@string/cautionCheckBox"
+        app:layout_constraintTop_toTopOf="@id/titleCaution"
+        app:layout_constraintBottom_toBottomOf="@+id/titleCaution"
         app:layout_constraintStart_toEndOf="@id/bodyStartGuideline"
         app:layout_constraintEnd_toEndOf="@+id/bodyEndGuideline" />
 
     <EditText
-        android:id="@+id/bodySpecialNote"
+        android:id="@+id/bodyCaution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/bodySpecialNote"
+        android:hint="@string/bodyCaution"
         android:textSize="15sp"
         style="@style/body"
+        android:inputType="text"
         android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/cautionCheckBox"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/createButton"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_save_24"

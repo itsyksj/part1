@@ -4,11 +4,11 @@
     <string name="titleBirthday">생년월일</string>
     <string name="titleBloodType">혈액형</string>
     <string name="titlePhoneNumber">비상연락처</string>
-    <string name="titleSpecialNote">특이사항</string>
+    <string name="titleCaution">주의사항</string>
     <string name="bodyName">홍길동</string>
-    <string name="bodyBirthday">0000.00.00</string>
+    <string name="bodyBirthday">2000.01.01</string>
     <string name="bodyBloodType">Rh+ A</string>
     <string name="bodyPhoneNumber">000-0000-0000</string>
-    <string name="checkBoxSpecialNote">특이사항 노출</string>
-    <string name="bodySpecialNote">특이사항 작성란</string>
+    <string name="cautionCheckBox">주의사항 노출</string>
+    <string name="bodyCaution">주의사항 작성란</string>
 </resources>

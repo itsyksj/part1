@@ -51,10 +51,10 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/titleSpecialNote"
+        android:id="@+id/titleCaution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/titleSpecialNote"
+        android:text="@string/titleCaution"
         style="@style/title"
         app:layout_constraintTop_toBottomOf="@id/titlePhoneNumber"
         tools:ignore="MissingConstraints" />
@@ -112,12 +112,12 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/bodySpecialNote"
+        android:id="@+id/bodyCaution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/bodySpecialNote"
+        android:text="@string/bodyCaution"
         style="@style/body"
-        app:layout_constraintBaseline_toBaselineOf="@+id/titleSpecialNote"
+        app:layout_constraintBaseline_toBaselineOf="@+id/titleCaution"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
