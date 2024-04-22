@@ -24,17 +24,17 @@ class EditActivity : AppCompatActivity() {
         val message = intent.getStringExtra("intentMessage") ?: "전달 데이터(메시지) 없음"
         Log.d("intentMessage", message)
 
-        //Adapter를 이용해 res/arrays/rhType에 속한 값만 선택하도록 설정하기
+        //Adapter를 이용해 res/arrays/rhType에 속한 값만 선택하기
         binding.bodyRhType.adapter = ArrayAdapter.createFromResource(
             this, R.array.rhType, android.R.layout.simple_spinner_item
         )
 
-        //Adapter를 이용해 res/arrays/bloodType에 속한 값만 선택하도록 설정하기
+        //Adapter를 이용해 res/arrays/bloodType에 속한 값만 선택하기
         binding.bodyBloodType.adapter = ArrayAdapter.createFromResource(
             this, R.array.bloodType, android.R.layout.simple_spinner_item
         )
 
-        //생년월일 입력락은 달력을 사용하도록 설정하기
+        //생년월일 입력락은 달력을 사용하기
         binding.bodyBirthday.setOnClickListener {
             val listener = OnDateSetListener { _, year, month, datyOfMonth ->
                 binding.bodyBirthday.text = "$year.${month.inc()}.$datyOfMonth"  }
