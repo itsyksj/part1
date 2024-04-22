@@ -2,6 +2,7 @@ package fastcompus.part1.chapter4
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //createButton을 누를 때 화면 이동하기 (MainActivity -> EditActivity)
+        //createButton을 누를 때 화면 이동하기 (MainActivity -> EditActivity) = 명시적 intent
         binding.createButton.setOnClickListener {
             val intent = Intent(this, EditActivity::class.java)
 
@@ -28,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         //deleteButton을 눌렀을 때 저장된 데이터 삭제하기
         binding.deleteButton.setOnClickListener {
             getDeleteData()
+        }
+
+        //bodyPhoneNumebr 부분을 눌렀을 때 전화앱으로 연결하기 = 암시적 intent
+        binding.bodyPhoneNumber.setOnClickListener {
+            val intent = with(Intent(Intent.ACTION_VIEW)) {
+
+                //번호 사이이 -가 작성된 경우 제거하기
+                val phoneNumber = binding.bodyPhoneNumber.text.toString().replace("-", "")
+                data = Uri.parse("tel:$phoneNumber")
+                startActivity(this)
+            }
         }
     }
 
