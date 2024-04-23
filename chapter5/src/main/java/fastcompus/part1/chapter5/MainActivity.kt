@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.Toast
 import fastcompus.part1.chapter5.databinding.ActivityMainBinding
 import java.lang.StringBuilder
+import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     private val firstNumber = StringBuilder("")
     private val secondNumber = StringBuilder("")
     private val operator = StringBuilder("")
+
+    //숫자를 표기에 대한 기본값 설정하기 (3자리마다 , 표기)
+    private val decimalFormat = DecimalFormat("#,###")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +44,10 @@ class MainActivity : AppCompatActivity() {
 
     //입력값 기본형태
     private fun updateInputNumber() {
-        binding.inputNumber.text = "$firstNumber $operator $secondNumber"
+        val firstFormatNumber = if(firstNumber.isNotEmpty()) decimalFormat.format(firstNumber.toString().toBigDecimal()) else ""
+        val secondeFormatNumber = if(secondNumber.isNotEmpty()) decimalFormat.format(secondNumber.toString().toBigDecimal()) else ""
+
+        binding.inputNumber.text = "$firstFormatNumber $operator $secondeFormatNumber"
     }
 
     //(+, -)연산자를 눌렀을 때 화면에 표시하기
@@ -80,10 +87,10 @@ class MainActivity : AppCompatActivity() {
 
         //연산하기
         val output = when(operator.toString()) {
-            "+" -> firstNumber + secondNumber
-            "-" -> firstNumber - secondNumber
+            "+" -> decimalFormat.format(firstNumber + secondNumber)
+            "-" -> decimalFormat.format(firstNumber - secondNumber)
             else -> "올바르지 않은 수식입니다"
-        }.toString()
+        }
 
         //전달받은 결과를 출력값으로 내보내기
         binding.outputNumber.text = output
