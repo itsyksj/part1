@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="gray_25">#40000000</color>
-    <color name="gray_80">#C6000000</color>
+    <color name="calculationText">#DA000000</color>
+    <color name="buttonText">#FFFFFF</color>
+    <color name="numberButton">#858585</color>
+    <color name="operatorButton">#C6000000</color>
 </resources>
