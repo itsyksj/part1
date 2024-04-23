@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     //(0 ~ 9)숫자버튼을 눌렀을 때 화면에 표시하기
     fun numberClicked(view: View) {
-
         //버튼을 통한 숫자입력이 아니면 "" 전달하기
         val numberString = (view as? Button)?.text.toString() ?:  ""
 
@@ -68,15 +67,16 @@ class MainActivity : AppCompatActivity() {
 
     //(=)연산자를 눌렀을 때 연산결과 출력하기
     fun equalClicked(view : View) {
-
         //연산결과를 출력하기 전 입력값에 대해 확인하기
         if(firstNumber.isEmpty() || secondNumber.isEmpty() || operator.isEmpty()) {
             Toast.makeText(this, "올바르지 않은 수식입니다", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val firstNumber = firstNumber.toString().toInt()
-        val secondNumber = secondNumber.toString().toInt()
+        //에러발생(IllegalStateException): 표현가능한 범위를 넘어선 경우
+        //- toInt() 대신 toBigDecimal()를 사용해 표현범위 확장하기
+        val firstNumber = firstNumber.toString().toBigDecimal()
+        val secondNumber = secondNumber.toString().toBigDecimal()
 
         //연산하기
         val output = when(operator.toString()) {
