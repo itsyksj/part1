@@ -45,60 +45,70 @@
         android:id="@+id/number1"
         android:text="1"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number2"
         android:text="2"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number3"
         android:text="3"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number4"
         android:text="4"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number5"
         android:text="5"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number6"
         android:text="6"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number7"
         android:text="7"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number8"
         android:text="8"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number9"
         android:text="9"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/number0"
         android:text="0"
         style="@style/numberKeypad"
+        android:onClick="numberClicked"
         app:layout_constraintHorizontal_weight="1"
         tools:ignore="MissingConstraints" />
 
@@ -106,18 +116,21 @@
         android:id="@+id/calculationClear"
         android:text="C"
         style="@style/operatorKeypad"
+        android:onClick="clearClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/plusOperator"
         android:text="+"
         style="@style/operatorKeypad"
+        android:onClick="operatorClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/minusOperator"
         android:text="-"
         style="@style/operatorKeypad"
+        android:onClick="operatorClicked"
         tools:ignore="MissingConstraints" />
 
     <Button
