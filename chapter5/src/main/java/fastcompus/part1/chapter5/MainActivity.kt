@@ -65,4 +65,28 @@ class MainActivity : AppCompatActivity() {
         updateInputNumber()
         Log.d("operatorClicked", "$operator 클릭")
     }
+
+    //(=)연산자를 눌렀을 때 연산결과 출력하기
+    fun equalClicked(view : View) {
+
+        //연산결과를 출력하기 전 입력값에 대해 확인하기
+        if(firstNumber.isEmpty() || secondNumber.isEmpty() || operator.isEmpty()) {
+            Toast.makeText(this, "올바르지 않은 수식입니다", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val firstNumber = firstNumber.toString().toInt()
+        val secondNumber = secondNumber.toString().toInt()
+
+        //연산하기
+        val output = when(operator.toString()) {
+            "+" -> firstNumber + secondNumber
+            "-" -> firstNumber - secondNumber
+            else -> "올바르지 않은 수식입니다"
+        }.toString()
+
+        //전달받은 결과를 출력값으로 내보내기
+        binding.outputNumber.text = output
+        Log.d("equalClicked", "= 클릭")
+    }
 }

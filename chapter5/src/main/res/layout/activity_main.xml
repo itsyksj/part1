@@ -137,6 +137,7 @@
         android:id="@+id/equalOperator"
         android:text="="
         style="@style/operatorKeypad"
+        android:onClick="equalClicked"
         app:layout_constraintHorizontal_weight="3"
         tools:ignore="MissingConstraints" />
 
