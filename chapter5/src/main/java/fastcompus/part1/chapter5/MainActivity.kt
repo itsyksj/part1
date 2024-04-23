@@ -89,4 +89,15 @@ class MainActivity : AppCompatActivity() {
         binding.outputNumber.text = output
         Log.d("equalClicked", "= 클릭")
     }
+
+    //c 버튼을 눌렀을 때 입력값, 출력값 모두 지우기
+    fun clearClicked(view: View) {
+        firstNumber.clear()
+        secondNumber.clear()
+        operator.clear()
+
+        updateInputNumber()
+        binding.outputNumber.text = ""
+        Log.d("clearClicked", "지우기 클릭")
+    }
 }
