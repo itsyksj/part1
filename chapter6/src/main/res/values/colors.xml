@@ -4,4 +4,6 @@
     <color name="navigation_background">#FFFFFFFF</color>
     <color name="navigation">#6D6D6D</color>
     <color name="button">#3C3C3C</color>
+    <color name="progress_bar_background">#B5B5B5</color>
+    <color name="progress_bar_time">#3C3C3C</color>
 </resources>
