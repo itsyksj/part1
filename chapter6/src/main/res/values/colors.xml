@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="navigation_background">#FFFFFFFF</color>
     <color name="navigation">#6D6D6D</color>
+    <color name="button">#3C3C3C</color>
 </resources>

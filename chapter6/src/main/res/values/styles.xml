@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="stopwatch_button">
+        <item name="backgroundTint">@color/button</item>
+        <item name="layout_constraintTop_toTopOf">@id/buttonTopGuideline</item>
+        <item name="layout_constraintBottom_toBottomOf">@id/buttonBottomGuideline</item>
+    </style>
+</resources>

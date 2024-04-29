@@ -1,14 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StopwatchFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="stopwatch layout" />
+        android:layout_height="match_parent" >
 
+        <TextView
+            android:id="@+id/stopwatch_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textSize="110sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/buttonTopGuideline"
+            app:layout_constraintVertical_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/stopwatch_text"
+            app:layout_constraintStart_toEndOf="@id/stopwatch_text" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/buttonTopGuideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.55" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/buttonBottomGuideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/stopwatch_button"
+            android:src="@drawable/baseline_refresh_24"
+            app:layout_constraintStart_toStartOf="@id/stopwatch_text"
+            tools:ignore="MissingConstraints" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/stopwatch_button"
+            android:src="@drawable/baseline_play_24"
+            app:layout_constraintStart_toEndOf="@+id/resetButton"
+            app:layout_constraintEnd_toStartOf="@+id/checkButton"
+            tools:ignore="MissingConstraints" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/pauseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/stopwatch_button"
+            android:visibility="gone"
+            android:src="@drawable/baseline_play_24"
+            app:layout_constraintStart_toEndOf="@+id/resetButton"
+            app:layout_constraintEnd_toStartOf="@+id/checkButton"
+            tools:ignore="MissingConstraints" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/checkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/stopwatch_button"
+            android:src="@drawable/baseline_check_24"
+            app:layout_constraintEnd_toEndOf="@id/stopwatch_text"
+            tools:ignore="MissingConstraints" />
+
+        <ScrollView
+            android:id="@+id/lapScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingTop="20dp"
+            app:layout_constraintTop_toTopOf="@id/buttonBottomGuideline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" >
+
+            <LinearLayout
+                android:id="@+id/lapList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
