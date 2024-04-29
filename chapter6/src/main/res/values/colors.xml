@@ -2,6 +2,5 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="navigation_background">#FFFFFFFF</color>
-    <color name="navigation_icon">#6D6D6D</color>
-    <color name="navigation_text">#5A5A5A</color>
+    <color name="navigation">#6D6D6D</color>
 </resources>

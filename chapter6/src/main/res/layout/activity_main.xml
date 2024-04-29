@@ -21,8 +21,8 @@
         android:layout_height="56dp"
         app:menu="@menu/bottom_navigation"
         android:background="@color/navigation_background"
-        app:itemIconTint="@color/navigation_icon"
-        app:itemTextColor="@color/navigation_text"
+        app:itemIconTint="@color/navigation"
+        app:itemTextColor="@color/navigation"
         app:layout_constraintTop_toBottomOf="@id/main_container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
