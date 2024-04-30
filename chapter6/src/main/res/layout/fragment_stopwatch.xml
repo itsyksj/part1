@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             style="@style/stopwatch_button"
             android:visibility="gone"
-            android:src="@drawable/baseline_play_24"
+            android:src="@drawable/baseline_pause_24"
             app:layout_constraintStart_toEndOf="@+id/resetButton"
             app:layout_constraintEnd_toStartOf="@+id/checkButton"
             tools:ignore="MissingConstraints" />
