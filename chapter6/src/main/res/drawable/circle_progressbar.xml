@@ -19,9 +19,10 @@
                 android:thicknessRatio="17"
                 android:shape="ring"
                 android:angle="0"
+                android:useLevel="true"
                 android:type="sweep">
+                <solid android:color="@color/progress_bar_time" />
             </shape>
         </rotate>
     </item>
-
 </layer-list>
