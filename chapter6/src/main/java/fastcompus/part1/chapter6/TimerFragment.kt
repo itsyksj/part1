@@ -98,7 +98,9 @@ class TimerFragment : Fragment() {
                     //초시계 종료메시지 띄우기
                     Toast.makeText(requireContext(), "Timer가 종료되었습니다", Toast.LENGTH_SHORT).show()
 
-
+                    //종료 알림음 보내기
+                    ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME)
+                        .startTone(ToneGenerator.TONE_CDMA_ALERT_AUTOREDIAL_LITE, 1000)
                 }
             }
         }
