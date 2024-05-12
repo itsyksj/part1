@@ -19,6 +19,13 @@ class MainActivity : AppCompatActivity(), WordAdapter.ItemClickListener {
         setContentView(mainBinding.root)
 
         initRecyclerView()
+
+        //addButton을 눌렀을 경우 AddActivity로 이동
+        mainBinding.addButton.setOnClickListener {
+            Intent(this, AddActivity::class.java).let {
+                startActivity(it)
+            }
+        }
     }
 
     //목록 초기화 메서드
