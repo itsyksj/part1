@@ -1,6 +1,10 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    //viewBinding 사용을 위한 플러그인 추가
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -47,4 +51,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //Room 라이브러리 사용을 위한 컴파일러 추가
+    implementation("androidx.room:room-ktx:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+
 }
