@@ -18,10 +18,10 @@ Data Class 안에 자동으로 생성되는 함수
 
  */
 
-@Entity(tableName = "word")
-data class Word(
+@Entity(tableName = "voca")
+data class VocaBook(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val englishWord: String,
+    val word: String,
     val mean: String,
-    val wordType: String
+    val type: String
 )

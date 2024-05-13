@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import fastcompus.part1.chapter7.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), WordAdapter.ItemClickListener {
+class MainActivity : AppCompatActivity(), VocaAdapter.ItemClickListener {
 
     private lateinit var mainBinding: ActivityMainBinding
-    private lateinit var wordAdapter: WordAdapter
+    private lateinit var vocaAdapter: VocaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +32,17 @@ class MainActivity : AppCompatActivity(), WordAdapter.ItemClickListener {
     private fun initRecyclerView() {
         //임시데이터 생성
         val dummyList = mutableListOf(
-            Word("culture", "문화, 교양", "명사"),
-            Word("experience", "경험, 체험", "명사"),
-            Word("none", "없음, 없다", "명사"),
-            Word("attract", "끌어당기다", "동사"),
-            Word("comparison", "비교, 대조", "명사"),
+            VocaBook(0, "culture", "문화, 교양", "명사"),
+            VocaBook(1, "experience", "경험, 체험", "명사"),
+            VocaBook(2, "none", "없음, 없다", "명사"),
+            VocaBook(3, "attract", "끌어당기다", "동사"),
+            VocaBook(4, "comparison", "비교, 대조", "명사"),
         )
 
         //Adapter를 초기화 하고 임시데이터 넣기
-        wordAdapter = WordAdapter(dummyList, this)
-        mainBinding.wordList.apply {
-            adapter = wordAdapter
+        vocaAdapter = VocaAdapter(dummyList, this)
+        mainBinding.vocaList.apply {
+            adapter = vocaAdapter
             layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
 
             //단어마다 구분선을 넣어 구분
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), WordAdapter.ItemClickListener {
     }
 
     //목록에서 단어를 눌렀을 경우
-    override fun onClick(word: Word){
-        Toast.makeText(this, "${word.englishWord} 클릭", Toast.LENGTH_SHORT).show()
+    override fun onClick(voca: VocaBook){
+        Toast.makeText(this, "${voca.word} 클릭", Toast.LENGTH_SHORT).show()
     }
 }

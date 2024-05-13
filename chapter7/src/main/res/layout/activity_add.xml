@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/EnglishWordInput"
+        android:id="@+id/wordInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="@id/endGuideline" >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditLayout"
+            android:id="@+id/wordEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="단어" />
@@ -88,12 +88,12 @@
         app:counterEnabled="true"
         android:layout_marginTop="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toBottomOf="@id/EnglishWordInput"
+        app:layout_constraintTop_toBottomOf="@id/wordInput"
         app:layout_constraintStart_toStartOf="@id/startGuideline"
         app:layout_constraintEnd_toEndOf="@id/endGuideline" >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/meanInputEditLayout"
+            android:id="@+id/meanEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="뜻" />
@@ -101,7 +101,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/wordTypeChip"
+        android:id="@+id/typeChip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:singleSelection="true"

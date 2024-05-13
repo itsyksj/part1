@@ -23,7 +23,7 @@
         app:layout_constraintGuide_percent="0.92" />
 
     <TextView
-        android:id="@+id/englishWord"
+        android:id="@+id/word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="단어"
@@ -39,11 +39,11 @@
         tools:text="뜻"
         android:textSize="15sp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/englishWord"
+        app:layout_constraintTop_toBottomOf="@id/word"
         app:layout_constraintStart_toStartOf="@+id/startGuideline" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/wordType"
+        android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="품사"
