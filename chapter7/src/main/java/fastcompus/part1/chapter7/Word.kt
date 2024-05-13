@@ -1,4 +1,8 @@
 package fastcompus.part1.chapter7
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /*
 
 Data Class : 데이터를 다루는데 최적화된 클래스
@@ -14,7 +18,9 @@ Data Class 안에 자동으로 생성되는 함수
 
  */
 
+@Entity(tableName = "word")
 data class Word(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val englishWord: String,
     val mean: String,
     val wordType: String
