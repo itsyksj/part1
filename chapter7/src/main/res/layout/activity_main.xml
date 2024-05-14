@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="@id/endGuideline" />
 
     <ImageView
-        android:id="@+id/createButton"
+        android:id="@+id/updateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_create_24"
@@ -94,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="deleteButton, createButton"
+        app:constraint_referenced_ids="deleteButton, updateButton"
         app:layout_constraintStart_toStartOf="@id/barrierGuideline"
         app:layout_constraintEnd_toEndOf="@id/barrierGuideline"/>
 
