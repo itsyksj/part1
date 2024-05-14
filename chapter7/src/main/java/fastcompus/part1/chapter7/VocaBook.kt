@@ -20,8 +20,8 @@ Data Class 안에 자동으로 생성되는 함수
 
 @Entity(tableName = "voca")
 data class VocaBook(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val word: String,
     val mean: String,
-    val type: String
+    val type: String,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0
 )

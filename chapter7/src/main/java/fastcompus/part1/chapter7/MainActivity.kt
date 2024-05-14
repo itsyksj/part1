@@ -30,17 +30,8 @@ class MainActivity : AppCompatActivity(), VocaAdapter.ItemClickListener {
 
     //목록 초기화 메서드
     private fun initRecyclerView() {
-        //임시데이터 생성
-        val dummyList = mutableListOf(
-            VocaBook(0, "culture", "문화, 교양", "명사"),
-            VocaBook(1, "experience", "경험, 체험", "명사"),
-            VocaBook(2, "none", "없음, 없다", "명사"),
-            VocaBook(3, "attract", "끌어당기다", "동사"),
-            VocaBook(4, "comparison", "비교, 대조", "명사"),
-        )
-
-        //Adapter를 초기화 하고 임시데이터 넣기
-        vocaAdapter = VocaAdapter(dummyList, this)
+        //Adapter를 초기화하고 DB(app-database)와 연결
+        vocaAdapter = VocaAdapter(mutableListOf(), this)
         mainBinding.vocaList.apply {
             adapter = vocaAdapter
             layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)

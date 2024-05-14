@@ -2,6 +2,7 @@ package fastcompus.part1.chapter7
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.chip.Chip
 import fastcompus.part1.chapter7.databinding.ActivityAddBinding
 
@@ -43,8 +44,22 @@ class AddActivity : AppCompatActivity() {
 
     //abbButton을 눌렀을 때 단어 저장
     private fun add() {
-        val text = addBinding.wordEdit.text.toString()
+        val word = addBinding.wordEdit.text.toString()
         val mean = addBinding.meanEdit.text.toString()
-        val type = findViewById<Chip>(addBinding.typeChip.checkedChipId)
+        val type = findViewById<Chip>(addBinding.typeChip.checkedChipId).text.toString()
+        val voca = VocaBook(word, mean, type)
+
+        //작업시간이 긴 작업(DB에 관한 작업)은 Thread에서 따로 작업진행
+        Thread {
+            //DB와의 상호작용을 통해 새로운 단어 추가
+            AppDatabase.getInstance(this)?.VocaDao()?.insert(voca)
+
+            //UI에 관한 작업은 runOnUiThread에서 진행
+            runOnUiThread {
+                Toast.makeText(this, "단어추가 완료", Toast.LENGTH_SHORT).show()
+            }
+
+            finish()
+        }.start()
     }
 }
