@@ -54,6 +54,6 @@ dependencies {
 
     //Room 라이브러리 사용을 위한 컴파일러 추가
     implementation("androidx.room:room-ktx:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 
 }
