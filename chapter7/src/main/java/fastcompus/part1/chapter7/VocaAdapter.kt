@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import fastcompus.part1.chapter7.databinding.ItmeVocaBinding
 
 
-class VocaAdapter(private val list: MutableList<VocaBook>,
+class VocaAdapter(val list: MutableList<VocaBook>,
                   private val itemClickListener: ItemClickListener? = null): RecyclerView.Adapter<VocaAdapter.VocaViewHolder>() {
 
     //Adapter 사용을 위해 Holder 선언

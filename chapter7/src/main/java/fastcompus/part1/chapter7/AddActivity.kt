@@ -1,5 +1,6 @@
 package fastcompus.part1.chapter7
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -58,6 +59,10 @@ class AddActivity : AppCompatActivity() {
             runOnUiThread {
                 Toast.makeText(this, "단어추가 완료", Toast.LENGTH_SHORT).show()
             }
+
+            //단어가 추가한 데이터 반영시키기
+            val intent = Intent().putExtra("isUpdated", true)
+            setResult(RESULT_OK, intent)
 
             finish()
         }.start()
