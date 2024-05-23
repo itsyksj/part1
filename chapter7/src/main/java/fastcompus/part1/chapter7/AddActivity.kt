@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
+import androidx.core.view.isEmpty
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.chip.Chip
 import fastcompus.part1.chapter7.databinding.ActivityAddBinding
 
@@ -34,6 +36,25 @@ class AddActivity : AppCompatActivity() {
             }
         }
 
+        //단어 입력에 대한 에러
+        binding.wordEdit.addTextChangedListener {
+            it?.let { word ->
+                binding.wordInput.error = when {
+                    word.isEmpty() -> "단어를 입력해주세요"
+                    word.length == 1 -> "2글자 이상으로 작성해주세요"
+                    word.length > 20 -> "작성가능한 범위를 넘겼습니다"
+                    else -> null
+                }
+            }
+        }
+
+        //뜻 입력에 대한 에러
+        binding.meanEdit.addTextChangedListener {
+            it?.let { mean ->
+                binding.meanInput.error = if(mean.isEmpty()) "뜻을 작성해주세요" else null
+            }
+        }
+
         originVoca = intent.getParcelableExtra("originVoca")
         originVoca?.let { voca ->
             binding.addButton.text = "수정"
@@ -57,7 +78,15 @@ class AddActivity : AppCompatActivity() {
     private fun vocaAdd() {
         val word = binding.wordEdit.text.toString()
         val mean = binding.meanEdit.text.toString()
-        val type = findViewById<Chip>(binding.typeChip.checkedChipId).text.toString()
+        val typeChip = findViewById<Chip>(binding.typeChip.checkedChipId)
+
+        //에러 발생 시 단어 추가불가
+        if(binding.wordInput.error != null || word.isEmpty() || binding.meanInput.error != null || mean.isEmpty() || typeChip == null) {
+            Toast.makeText(this, "정보를 제대로 작성되지 않았습니다", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val type = typeChip?.text.toString()
         val voca = VocaBook(word, mean, type)
 
         //백그라운드 관련 작업
@@ -79,6 +108,12 @@ class AddActivity : AppCompatActivity() {
         val mean = binding.meanEdit.text.toString()
         val type = findViewById<Chip>(binding.typeChip.checkedChipId).text.toString()
         val editVoca = originVoca?.copy(word = word, mean = mean, type = type)
+
+        //에러 발생 시 단어 수정불가
+        if(binding.wordInput.error != null || binding.meanInput.error != null) {
+            Toast.makeText(this, "정보를 제대로 작성되지 않았습니다", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         Thread {
             editVoca?.let { voca ->
