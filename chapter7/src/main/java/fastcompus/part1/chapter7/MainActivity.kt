@@ -5,120 +5,133 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import fastcompus.part1.chapter7.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), VocaAdapter.ItemClickListener {
-
-    private lateinit var mainBinding: ActivityMainBinding
+class MainActivity: AppCompatActivity(), VocaAdapter.ItemClickListener {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var vocaAdapter: VocaAdapter
-
-    //수정, 삭제를 위한 단어 선택
     private var selectedVoca: VocaBook? = null
 
-    //AddActivity에서 단어가 추가된 결과 가져오기
-    private val updateAddWordResult = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        val isUpdated = result?.data?.getBooleanExtra("isUpdated", false) ?: false
-        if (result.resultCode == RESULT_OK && isUpdated) {
-            updateAddWord()
+    //AddActivity에서 단어추가에 대한 결과처리
+    private val updateAddVocaResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        val isUpdated = result.data?.getBooleanExtra("isUpdated", false) ?: false
+        if(result.resultCode == RESULT_OK && isUpdated) {
+            updateAddVoca()
+        }
+    }
+
+    //AddActivity에서 단어변경에 대한 결과처리
+    private val updateEditVocaResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val editVoca = result.data?.getParcelableExtra<VocaBook>("editVoca")
+        if(result.resultCode == RESULT_OK && editVoca != null) {
+            updateEditVoca(editVoca)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainBinding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        initRecyclerView()
+        initVocaList()
 
-        //addButton을 눌렀을 경우 AddActivity로 이동
-        mainBinding.addButton.setOnClickListener {
-            Intent(this, AddActivity::class.java).let {
-                updateAddWordResult.launch(it)
-            }
+        binding.deleteButton.setOnClickListener {
+            vocaDelete()
         }
 
-        //deleteButton을 눌렀을 경우
-        mainBinding.deleteButton.setOnClickListener {
-            delete()
+        //updateButton를 누르면 AddActivity로 이동
+        binding.updateButton.setOnClickListener {
+            vocaEdit()
+        }
+
+        //addButton을 누르면 AddActivity로 이동
+        binding.addButton.setOnClickListener {
+            Intent(this, AddActivity::class.java).let {
+                updateAddVocaResult.launch(it)
+            }
         }
     }
 
-    //목록 초기화 메서드
-    private fun initRecyclerView() {
+    //단어목록 초기화
+    private fun initVocaList() {
         //Adapter를 초기화하고 DB(app-database)와 연결
         vocaAdapter = VocaAdapter(mutableListOf(), this)
-        mainBinding.vocaList.apply {
-            adapter = vocaAdapter
-            layoutManager =
-                LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
 
-            //단어마다 구분선을 넣어 구분
-            val dividerItemDecoration =
-                DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL)
-            addItemDecoration(dividerItemDecoration)
+        binding.vocaList.apply {
+            adapter = vocaAdapter
+
+            //RecyclerView에 대한 설정(정렬방법, 구분선)
+            layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL))
         }
 
         Thread {
-            //저장된 데이터를 list로 가져오기
             val list = AppDatabase.getInstance(this)?.VocaDao()?.getAll() ?: emptyList()
-
-            //Thread 업데이트가 될 때 UI 업데이트가 안 될 수 있음 (확인을 위해 1초 뒤에 Thread 업데이트 실시)
-            //Thread.sleep(1000)
-
             vocaAdapter.list.addAll(list)
 
-            //데이터가 변경된 경우 Adapter를 통해 UI 변경시키기
-            runOnUiThread {
-                //notifyDataSetChanged : recyclerView에 포함된 모든 정보를 가져옴 (정보량에 따라 과부하 가능)
-                vocaAdapter.notifyDataSetChanged()
-            }
+            //recyclerView에 배열크기, 아이템이 변경된 부분만 다시 불러옴
+            runOnUiThread { vocaAdapter.notifyDataSetChanged() }
         }.start()
     }
 
-    //목록에서 선택된 단어를 화면 위쪽에 표시하기
+    //선택된 단어 상단표시
     override fun onClick(voca: VocaBook) {
         selectedVoca = voca
-        mainBinding.word.text = voca.word
-        mainBinding.mean.text = voca.mean
+        binding.word.text = voca.word
+        binding.mean.text = voca.mean
     }
 
-    //단어를 추가한 후 UI 변경하기
-    private fun updateAddWord() {
-        Thread {
-            //가장 마지막에 추가된 단어 가져오기
-            AppDatabase.getInstance(this)?.VocaDao()?.getLastWord()?.let { voca ->
-                vocaAdapter.list.add(0, voca)
-
-                //데이터가 변경된 것을 UI에 알림
-                runOnUiThread { vocaAdapter.notifyDataSetChanged() }
-            }
-        }.start()
-    }
-
-    //선택된 단어 삭제하기
-    private fun delete() {
-        if (selectedVoca == null) return
+    //선택된 단어 삭제
+    private fun vocaDelete() {
+        if(selectedVoca == null) return
 
         Thread {
-            selectedVoca?.let { vocaBook ->
-                AppDatabase.getInstance(this)?.VocaDao()?.delete(vocaBook)
+            selectedVoca?.let { voca ->
+                AppDatabase.getInstance(this)?.VocaDao()?.delete(voca)
 
-                //선택된 단어가 삭제된 UI로 변경
                 runOnUiThread {
-                    vocaAdapter.list.remove(vocaBook)
+                    vocaAdapter.list.remove(voca)
                     vocaAdapter.notifyDataSetChanged()
-                    mainBinding.word.text = ""
-                    mainBinding.mean.text = ""
-                    Toast.makeText(this, "단어삭제가 완료되었습니다", Toast.LENGTH_SHORT).show()
+                    binding.word.text = ""
+                    binding.mean.text = ""
+                    Toast.makeText(this, "단어 삭제", Toast.LENGTH_SHORT).show()
                 }
                 selectedVoca = null
             }
         }.start()
     }
+
+    //선택된 단어 수정
+    private fun vocaEdit() {
+        if(selectedVoca == null) return
+        val intent = Intent(this, AddActivity::class.java).putExtra("originVoca", selectedVoca)
+        updateEditVocaResult.launch(intent)
+    }
+
+    //AddActivity에서 수정된 결과를 상단에도 적용
+    private fun updateEditVoca(voca: VocaBook) {
+        val index = vocaAdapter.list.indexOfFirst { it.id == voca.id }
+        vocaAdapter.list[index] = voca
+
+        runOnUiThread {
+            selectedVoca = voca
+            vocaAdapter.notifyItemChanged(index)
+            binding.word.text = voca.word
+            binding.mean.text = voca.mean
+        }
+    }
+
+    //AddActivity에서 수정된 결과를 단어목록에 반영
+    private fun updateAddVoca() {
+        Thread {
+            AppDatabase.getInstance(this)?.VocaDao()?.getLastVoca()?.let { voca ->
+                vocaAdapter.list.add(0, voca)
+
+                runOnUiThread { vocaAdapter.notifyDataSetChanged() }
+            }
+        }.start()
+    }
 }
+

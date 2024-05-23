@@ -14,7 +14,7 @@ interface VocaDao {
 
     //가장 최근(마지막)의 단어에 대한 정보 1개만 가져오기
     @Query("SELECT * from voca ORDER BY id DESC LIMIT 1")
-    fun getLastWord(): VocaBook
+    fun getLastVoca(): VocaBook
 
 
     //새로운 단어 추가하기

@@ -1,7 +1,9 @@
 package fastcompus.part1.chapter7
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 /*
 
@@ -18,10 +20,15 @@ Data Class 안에 자동으로 생성되는 함수
 
  */
 
+//@Parcelize : 객체를 쉽게 직렬화하여 Intent, Bundle를 통해 전달하는 어노테이션
+//@Entity : DB 테이블을 정의하는 어노테이션
+//@PrimaryKey : 테이블의 기본값을 지정하는 어노테이션
+
+@Parcelize
 @Entity(tableName = "voca")
 data class VocaBook(
     val word: String,
     val mean: String,
     val type: String,
     @PrimaryKey(autoGenerate = true) val id: Int = 0
-)
+): Parcelable
