@@ -64,6 +64,22 @@ class MainActivity : AppCompatActivity() {
         }.show()
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode) {
+            READ_MEDIA_IMAGES -> {
+                if(grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED) {
+                    loadImage()
+                }
+            }
+        }
+    }
+
     //이미지 권한허용에 대한 설정
     private fun requestReadExternalImage() {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES), 100)
