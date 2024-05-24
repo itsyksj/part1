@@ -1,11 +1,11 @@
 package fastcompus.part1.chapter8
 
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -13,6 +13,10 @@ import fastcompus.part1.chapter8.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private val imageLoadLauncher = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uriList ->
+        updateImage(uriList)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +43,14 @@ class MainActivity : AppCompatActivity() {
                 showPermissionDialog()
             }
             else -> {
-                requestReadExternalStorage()
+                requestReadExternalImage()
             }
         }
     }
 
-    //이미지 가져오기
+    //이미지 가져오기(image 타입으로 구성된 파일만 불러오기)
     private fun loadImage() {
-        Toast.makeText(this, "loag Image", Toast.LENGTH_SHORT).show()
+        imageLoadLauncher.launch("image/*")
     }
 
     //이미지 권한에 대한 다이얼로그 띄우기
@@ -55,13 +59,18 @@ class MainActivity : AppCompatActivity() {
             setMessage("이미지를 가져오기 위한 접근권한을 허용해주세요")
             setNegativeButton("불가", null)
             setPositiveButton("허용") { _, _ ->
-                requestReadExternalStorage()
+                requestReadExternalImage()
             }
         }.show()
     }
 
     //이미지 권한허용에 대한 설정
-    private fun requestReadExternalStorage() {
+    private fun requestReadExternalImage() {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES), 100)
+    }
+
+    //선택한 이미지 화면에 띄우기
+    private fun updateImage(uriLis: List<Uri>) {
+        Log.d("updatImage", "$uriLis")
     }
 }
