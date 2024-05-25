@@ -73,7 +73,8 @@ class MainActivity : AppCompatActivity() {
 
         when(requestCode) {
             READ_MEDIA_IMAGES -> {
-                if(grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED) {
+                val resultCode = grantResults.firstOrNull() ?: PackageManager.PERMISSION_GRANTED
+                if(resultCode == PackageManager.PERMISSION_GRANTED) {
                     loadImage()
                 }
             }
